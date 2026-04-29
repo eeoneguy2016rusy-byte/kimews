@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NF4QUCo2JtE=",
+  "dgSpecHash": "NKbKnYcMfrk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\PhotoStudio\\PhotoStudio.csproj",
+  "projectFilePath": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\photostudio\\PhotoStudio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nagba\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\nagba\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

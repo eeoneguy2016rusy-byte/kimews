@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\PhotoStudio\\PhotoStudio.csproj": {}
+    "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\photostudio\\PhotoStudio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\PhotoStudio\\PhotoStudio.csproj": {
+    "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\photostudio\\PhotoStudio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\PhotoStudio\\PhotoStudio.csproj",
+        "projectUniqueName": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\photostudio\\PhotoStudio.csproj",
         "projectName": "PhotoStudio",
-        "projectPath": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\PhotoStudio\\PhotoStudio.csproj",
+        "projectPath": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\photostudio\\PhotoStudio.csproj",
         "packagesPath": "C:\\Users\\nagba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\PhotoStudio\\obj\\",
+        "outputPath": "C:\\Users\\nagba\\OneDrive\\Рабочий стол\\photostudio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nagba\\AppData\\Roaming\\NuGet\\NuGet.Config"

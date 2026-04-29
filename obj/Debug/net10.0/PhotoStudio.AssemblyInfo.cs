@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PhotoStudio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30c17e9ea447d1e86008a90c9150c16beb932f22")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8180fb9d6a35293cd2928aed74ec63e47cf256a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("PhotoStudio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PhotoStudio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
