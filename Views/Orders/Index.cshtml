@@ -1,0 +1,112 @@
+@model IEnumerable<PhotoStudio.Models.Order>
+
+@{
+    var userRole = Context.Session.GetString("UserRole");
+    var isAdmin = userRole == "Admin";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📝 Управление заказами</h2>
+    @if (isAdmin)
+    {
+        <a asp-action="Create" class="btn btn-primary">➕ Новый заказ</a>
+    }
+</div>
+
+<!-- Фильтрация -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">🔍 Фильтр заказов</h5>
+    </div>
+    <div class="card-body">
+        <form method="get" asp-action="Index" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Услуга</label>
+                <select name="serviceId" class="form-select">
+                    <option value="">Все услуги</option>
+                    @foreach (var service in ViewBag.Services)
+                    {
+                        <option value="@service.Value" selected="@(service.Value.ToString() == ViewBag.ServiceId?.ToString())">@service.Text</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="col-md-3">
+                <label class="form-label">Мин. цена</label>
+                <input type="number" name="minPrice" class="form-control" value="@ViewBag.MinPrice" placeholder="от" />
+            </div>
+            
+            <div class="col-md-3">
+                <label class="form-label">Макс. цена</label>
+                <input type="number" name="maxPrice" class="form-control" value="@ViewBag.MaxPrice" placeholder="до" />
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">От даты</label>
+                <input type="date" name="startDate" class="form-control" value="@ViewBag.StartDate" />
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">До даты</label>
+                <input type="date" name="endDate" class="form-control" value="@ViewBag.EndDate" />
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">🔎 Применить фильтр</button>
+                <a asp-action="Index" class="btn btn-secondary">❌ Очистить</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Таблица заказов -->
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Дата съемки</th>
+                <th>Клиент</th>
+                <th>Услуга</th>
+                <th>Фотограф</th>
+                <th>Статус</th>
+                <th class="text-end">Сумма</th>
+                @if (isAdmin)
+                {
+                    <th class="text-end">Действия</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.SessionDate.ToShortDateString()</td>
+                        <td>@item.Client?.FullName</td>
+                        <td>@item.Service?.ServiceName</td>
+                        <td>@item.Photographer?.FullName</td>
+                        <td><span class="badge bg-secondary">@item.Status</span></td>
+                        <td class="text-end fw-bold">@item.TotalAmount.ToString("N0") ₽</td>
+                        @if (isAdmin)
+                        {
+                            <td class="text-end">
+                                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-danger" 
+                                       onclick="return confirm('Удалить заказ?')">🗑️ Удалить</button>
+                                </form>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="@(isAdmin ? 8 : 7)" class="text-center py-4 text-muted">Заказы не найдены</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,40 @@
+@model PhotoStudio.Models.Order
+
+@{
+    ViewData["Title"] = "Новый заказ";
+}
+
+<h2>➕ Оформление заказа</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    
+    <div class="mb-3">
+        <label asp-for="SessionDate" class="form-label">Дата и время съемки</label>
+        <input asp-for="SessionDate" type="datetime-local" class="form-control" required />
+        <span asp-validation-for="SessionDate" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="ClientId" class="form-label">Клиент</label>
+        <select asp-for="ClientId" class="form-control" asp-items="ViewBag.Clients" required></select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="ServiceId" class="form-label">Услуга</label>
+        <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.Services" required></select>
+        <span asp-validation-for="ServiceId" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="PhotographerId" class="form-label">Фотограф</label>
+        <select asp-for="PhotographerId" class="form-control" asp-items="ViewBag.Photographers" required></select>
+        <span asp-validation-for="PhotographerId" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">✅ Создать заказ</button>
+        <a asp-action="Index" class="btn btn-secondary">❌ Отмена</a>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+@model PhotoStudio.Models.LoginViewModel
+
+@{ Layout = null; } @* Отключаем основное меню для страницы входа *@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body { background-color: #f4f4f4; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+    </style>
+</head>
+<body>
+    <div class="login-card text-center">
+        <h3 class="mb-4">Фотостудия Блик</h3>
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div class="mb-3 text-start">
+                <label>Логин</label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <div class="mb-3 text-start">
+                <label>Пароль</label>
+                <input asp-for="Password" type="password" class="form-control" />
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success btn-lg">Войти</button> 
+            </div>
+
+            <div class="mt-3 text-center">
+                <a href="#" class="text-decoration-none text-muted small">Забыли пароль?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

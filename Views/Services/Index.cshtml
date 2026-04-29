@@ -1,0 +1,61 @@
+@model IEnumerable<PhotoStudio.Models.Service>
+
+@{
+    var userRole = Context.Session.GetString("UserRole");
+    var isAdmin = userRole == "Admin";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">🛠 Каталог услуг</h2>
+        <p class="text-muted">Все доступные услуги студии</p>
+    </div>
+    @if (isAdmin)
+    {
+        <a asp-action="Create" class="btn btn-primary shadow-sm">➕ Добавить услугу</a>
+    }
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th class="text-end">Цена</th>
+                <th class="text-center">Длительность</th>
+                @if (isAdmin)
+                {
+                    <th class="text-end">Действия</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fw-bold">@item.ServiceName</td>
+                    <td class="text-muted" style="max-width: 300px; font-size: 0.9rem;">@item.Description</td>
+                    <td class="text-end fw-bold">@item.Price.ToString("N0") ₽</td>
+                    <td class="text-center"><span class="badge bg-light text-dark border">@item.DurationMin мин</span></td>
+                    @if (isAdmin)
+                    {
+                        <td class="text-end">
+                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                   onclick="return confirm('Удалить эту услугу?')">🗑️ Удалить</button>
+                            </form>
+                        </td>
+                    }
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="@(isAdmin ? 5 : 4)" class="text-center py-5 text-muted">Список пуст</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

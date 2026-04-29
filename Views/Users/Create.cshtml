@@ -1,0 +1,34 @@
+@model PhotoStudio.Models.Employee
+
+@{
+    ViewData["Title"] = "Добавить пользователя";
+}
+
+<h2>Добавить пользователя</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    
+    <div class="form-group mb-3">
+        <label asp-for="FullName" class="form-label">Имя пользователя</label>
+        <input asp-for="FullName" class="form-control" required />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Email" class="form-label">Email (Логин)</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Phone" class="form-label">Телефон</label>
+        <input asp-for="Phone" class="form-control" required />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">✅ Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">❌ Отмена</a>
+    </div>
+</form>

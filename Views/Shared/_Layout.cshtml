@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PhotoStudio</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        :root {
+            --sidebar-width: 250px;
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+        }
+        body { background-color: #f8f9fa; font-family: 'Inter', -apple-system, sans-serif; }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--primary-color);
+            color: white;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+        .sidebar-header { padding: 0 20px 20px; border-bottom: 1px solid #3e4f5f; margin-bottom: 20px; }
+        .sidebar a {
+            color: #bdc3c7;
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .sidebar a:hover { background: #34495e; color: white; padding-left: 25px; }
+        .sidebar a.active { background: var(--accent-color); color: white; }
+
+        .main-wrapper { margin-left: var(--sidebar-width); padding: 30px; }
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: none;
+        }
+        .btn-primary { background: var(--accent-color); border: none; padding: 8px 20px; border-radius: 6px; }
+        .table thead { background: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a asp-controller="Home" asp-action="Index" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-header">
+                <img src="/images/logo.png" alt="Блик" style="width: 100%; max-width: 120px; height: auto; object-fit: contain; margin: 0 auto;" />
+            </div>
+        </a>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">🏠 Главная</a>
+            <a asp-controller="Services" asp-action="Index">🛠 Услуги</a>
+
+            @{ var role = Context.Session.GetString("UserRole"); }
+
+            @if (role == "Admin")
+            {
+                <a asp-controller="Clients" asp-action="Index">👥 Клиенты</a>
+            }
+
+            <a asp-controller="Photographers" asp-action="Index">📷 Фотографы</a>
+
+            @if (role == "Admin" || role == "Photographer")
+            {
+                <a asp-controller="Orders" asp-action="Index">📝 Заказы</a>
+            }
+    
+            <a asp-controller="Account" asp-action="Logout" class="text-danger mt-auto">🚪 Выход</a>
+            </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <main role="main" class="content-card">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
